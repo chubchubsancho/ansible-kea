@@ -1,0 +1,11 @@
+---
+kea_building_requirements:
+  - automake
+  - libtool
+  - pkg-config
+  - build-essential
+  - ccache
+  - libboost-dev
+  - libboost-system-dev
+  - liblog4cplus-dev
+  - libssl-dev

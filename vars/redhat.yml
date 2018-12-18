@@ -1,0 +1,21 @@
+---
+kea_building_requirements:
+  - cmake
+  - bison
+  - flex
+  - pcre-devel
+  - libev-devel
+  - protobuf
+  - autoconf
+  - automake
+  - libtool
+  - gtest-devel
+  - openssl-devel
+  - epel-release
+  - log4cplus-devel
+  - ccache
+  - boost-devel
+
+kea_building_requirements_centos:
+  - centos_release_scl
+  - devtoolset-7-gcc*
