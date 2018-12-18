@@ -1,0 +1,4 @@
+---
+# Define witch database backends kea will use must be
+# memfile / mysql / postgresql or cassandra
+kea_database_backends: memfile
