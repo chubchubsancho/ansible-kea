@@ -1,0 +1,62 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: kea-debian9
+    image: debian:stretch
+    env:
+      container: docker
+    groups:
+      - stable
+  - name: kea-debian8
+    image: debian:jessie
+    env:
+      container: docker
+    groups:
+      - stable
+  - name: kea-debian7
+    image: debian:wheezy
+    env:
+      container: docker
+    groups:
+      - stable
+  - name: kea-centos7
+    image: centos:7
+    env:
+      container: docker
+    groups:
+      - stable
+
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      group_vars: group_vars/
+      host_vars: host_vars/
+  playbooks:
+    converge: ../ressources/playbook.yml
+  options:
+    vvv: true
+
+scenario:
+  name: install
+  test_sequence:
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - side_effect
+    - verify
+    - destroy
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
