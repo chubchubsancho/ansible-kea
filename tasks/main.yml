@@ -1,0 +1,12 @@
+---
+- name: "import {{ ansible_os_family | lower }} variables"
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+  tags:
+    - install
+    - variables
+
+- name: "install prerequisites software"
+  include_tasks: "{{ ansible_os_family | lower }}-prerequisites.yml"
+  tags:
+    - install
+    - prerequisites

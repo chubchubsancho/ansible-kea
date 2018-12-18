@@ -1,0 +1,9 @@
+---
+- name: "install building requirements"
+  apt:
+    name: "{{ kea_building_requirements }}"
+    state: present
+    update_cache: true
+  tags:
+    - install
+    - prerequisites

@@ -1,0 +1,16 @@
+---
+- name: "install building requirements"
+  yum:
+    name: "{{ kea_building_requirements }}"
+    state: present
+  tags:
+    - install
+    - prerequisites
+
+- name: "install centos building requirements"
+  yum:
+    name: "{{ kea_prerequisites }}"
+    state: present
+  tags:
+    - install
+    - prerequisites
