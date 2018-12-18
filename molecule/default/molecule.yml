@@ -1,0 +1,32 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/ressources/rules/yaml-lint.yml
+
+platforms:
+  - name: instance
+    image: centos:7
+
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+    options:
+      force-color: true
+  playbooks:
+    converge: ../ressources/playbook.yml
+
+scenario:
+  name: default
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
