@@ -10,3 +10,10 @@
   tags:
     - install
     - prerequisites
+
+- name: "install database backends prerequisites"
+  include_tasks: "{{ ansible_os_family | lower }}-backends.yml"
+  when: kea_backends == "mysql" or kea_backends == "postgresql" kea_backends == "cassandra"
+  tags:
+    - install
+    - backends
