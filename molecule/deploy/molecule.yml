@@ -6,30 +6,44 @@ driver:
   name: docker
 
 platforms:
-  - name: kea-debian9
+  - name: kea-debian9-memfile
     image: debian:stretch
     env:
       container: docker
     groups:
-      - stable
-  - name: kea-debian8
+      - deploy
+  - name: kea-debian9-mysql
+    image: debian:stretch
+    env:
+      container: docker
+    groups:
+      - deploy
+      - mysql
+  - name: kea-debian8-memfile
     image: debian:jessie
     env:
       container: docker
     groups:
-      - stable
-  - name: kea-debian7
-    image: debian:wheezy
+      - deploy
+  - name: kea-debian8-mysql
+    image: debian:jessie
     env:
       container: docker
     groups:
-      - stable
-  - name: kea-centos7
-    image: centos:7
-    env:
-      container: docker
-    groups:
-      - stable
+      - deploy
+      - mysql
+  # - name: kea-debian7
+  #   image: debian:wheezy
+  #   env:
+  #     container: docker
+  #   groups:
+  #     - stable
+  # - name: kea-centos7
+  #   image: centos:7
+  #   env:
+  #     container: docker
+  #   groups:
+  #     - deploy
 
 provisioner:
   name: ansible
@@ -43,7 +57,7 @@ provisioner:
     vvv: true
 
 scenario:
-  name: install
+  name: deploy
   test_sequence:
     - destroy
     - dependency
