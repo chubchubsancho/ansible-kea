@@ -5,3 +5,16 @@ kea_database_backends: memfile
 
 # Define kea version to install
 kea_version: 1.5.0
+
+# Kea user
+kea_user: kea
+
+# Kea group
+kea_group: kea
+
+# Defining MySQL client config if mysql is set as database backends
+# kea_mysql_config:
+#   host: localhost
+#   user: "{{ kea_mysql_user }}"
+#   password: "{{ kea_mysql_password }}"
+#   port: 3306

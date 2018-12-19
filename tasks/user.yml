@@ -1,0 +1,9 @@
+---
+- name: "create kea user"
+  user:
+    name: "{{ kea_user }}"
+    state: present
+    system: true
+  tags:
+    - install
+    - user

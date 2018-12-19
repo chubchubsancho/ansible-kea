@@ -1,0 +1,5 @@
+[client]
+host    = {{ kea_mysql_config.host | default('localhost') }}
+user    = {{ kea_mysql_config.user | default('kea') }}
+password= {{ kea_mysql_config.password | default('kea') }}
+port    = {{ kea_mysql_config.port | default('3306') }}
