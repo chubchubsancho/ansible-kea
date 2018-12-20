@@ -10,7 +10,7 @@ kea_building_requirements:
   - automake
   - libtool
   - openssl-devel
-  - epel-release
+  - gtest-devel
   - log4cplus-devel
   - ccache
   - boost-devel
