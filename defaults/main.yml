@@ -15,6 +15,6 @@ kea_group: kea
 # Defining MySQL client config if mysql is set as database backends
 kea_mysql_config:
   host: localhost
-#  user: "{{ kea_mysql_user }}"
-#  password: "{{ kea_mysql_password }}"
+  #  user: "{{ kea_mysql_user }}"
+  #  password: "{{ kea_mysql_password }}"
   port: 3306

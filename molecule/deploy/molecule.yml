@@ -32,24 +32,24 @@ platforms:
     groups:
       - deploy
       - mysql
-  # - name: kea-debian7-memfile
-  #   image: debian:wheezy
-  #   env:
-  #     container: docker
-  #   groups:
-  #     - stable
-  # - name: kea-debian7-mysql
-  #   image: debian:wheezy
-  #   env:
-  #     container: docker
-  #   groups:
-  #     - stable
-  # - name: kea-centos7
-  #   image: centos:7
-  #   env:
-  #     container: docker
-  #   groups:
-  #     - deploy
+    # - name: kea-debian7-memfile
+    #   image: debian:wheezy
+    #   env:
+    #     container: docker
+    #   groups:
+    #     - stable
+    # - name: kea-debian7-mysql
+    #   image: debian:wheezy
+    #   env:
+    #     container: docker
+    #   groups:
+    #     - stable
+    # - name: kea-centos7
+    #   image: centos:7
+    #   env:
+    #     container: docker
+    #   groups:
+    #     - deploy
 
 provisioner:
   name: ansible
