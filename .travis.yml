@@ -22,6 +22,7 @@ matrix:
 jobs:
   include:
     - stage: linter
+      env: image=debian verion=9 group=memfile
       script:
         - >
            docker run --rm -it
@@ -30,7 +31,7 @@ jobs:
            -w /tmp/$(basename "$PWD")
            quay.io/ansible/molecule:latest
            sudo molecule lint
-    - name: deploy kea whith memfile as backends
+    - name: deploy kea on $image $version with $group as backends
       env:
         - scenario=deploy-kea-memfile
       script:
