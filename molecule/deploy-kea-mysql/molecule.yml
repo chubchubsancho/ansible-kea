@@ -6,18 +6,34 @@ driver:
   name: docker
 
 platforms:
-  - name: kea-centos7-memfile
+  - name: kea-debian-7
+    image: debian:7
+    env:
+      container: docker
+    groups:
+      - deploy
+      - mysql
+  - name: kea-debian-8
+    image: debian:8
+    env:
+      container: docker
+    groups:
+      - deploy
+      - mysql
+  - name: kea-debian-9
+    image: debian:9
+    env:
+      container: docker
+    groups:
+      - deploy
+      - mysql
+  - name: kea-centos-7
     image: centos:7
     env:
       container: docker
     groups:
       - deploy
-  - name: kea-centos7-mysql
-    image: centos:7
-    env:
-      container: docker
-    groups:
-      - deploy
+      - mysql
 
 provisioner:
   name: ansible
@@ -31,7 +47,7 @@ provisioner:
     vvv: true
 
 scenario:
-  name: deploy-centos-7
+  name: deploy-kea-mysql
   test_sequence:
     - destroy
     - dependency

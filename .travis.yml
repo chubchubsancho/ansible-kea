@@ -23,48 +23,24 @@ jobs:
            quay.io/ansible/molecule:latest
            sudo molecule lint
     - stage: deploy
-      name: deploy kea on debian 7
+      name: deploy kea whith memfile as backends
       env:
-        - scenario=deploy-debian-7
+        - scenario=deploy-kea-memfile
       script:
         - >
-           travis_wait 30 sleep infinity & docker run --rm -it
+           travis_wait 60 sleep infinity & docker run --rm -it
            --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
            -v /var/run/docker.sock:/var/run/docker.sock
            -w /tmp/$(basename "$PWD")
            quay.io/ansible/molecule:latest
            sudo molecule test --scenario-name $scenario
     - stage: deploy
-      name: deploy kea on debian 8
+      name: deploy kea with mysql as backends
       env:
-        - scenario=deploy-debian-8
+        - scenario=deploy-kea-mysql
       script:
         - >
-           travis_wait 30 sleep infinity & docker run --rm -it
-           --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
-           -v /var/run/docker.sock:/var/run/docker.sock
-           -w /tmp/$(basename "$PWD")
-           quay.io/ansible/molecule:latest
-           sudo molecule test --scenario-name $scenario
-    - stage: deploy
-      name: deploy kea on debian 9
-      env:
-        - scenario=deploy-debian-9
-      script:
-        - >
-           travis_wait 30 sleep infinity & docker run --rm -it
-           --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
-           -v /var/run/docker.sock:/var/run/docker.sock
-           -w /tmp/$(basename "$PWD")
-           quay.io/ansible/molecule:latest
-           sudo molecule test --scenario-name $scenario
-    - stage: deploy
-      name: deploy kea on centos 7
-      env:
-        - scenario=deploy-centos-7
-      script:
-        - >
-           travis_wait 30 sleep infinity & docker run --rm -it
+           travis_wait 60 sleep infinity & docker run --rm -it
            --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
            -v /var/run/docker.sock:/var/run/docker.sock
            -w /tmp/$(basename "$PWD")

@@ -6,18 +6,30 @@ driver:
   name: docker
 
 platforms:
-  - name: kea-debian7-memfile
-    image: debian:wheezy
+  - name: kea-debian-7
+    image: debian:7
     env:
       container: docker
     groups:
-      - stable
-  - name: kea-debian7-mysql
-    image: debian:wheezy
+      - deploy
+  - name: kea-debian-8
+    image: debian:8
     env:
       container: docker
     groups:
-      - stable
+      - deploy
+  - name: kea-debian-9
+    image: debian:9
+    env:
+      container: docker
+    groups:
+      - deploy
+  - name: kea-centos-7
+    image: centos:7
+    env:
+      container: docker
+    groups:
+      - deploy
 
 provisioner:
   name: ansible
@@ -31,7 +43,7 @@ provisioner:
     vvv: true
 
 scenario:
-  name: deploy-debian-7
+  name: deploy-kea-memfile
   test_sequence:
     - destroy
     - dependency
