@@ -1,5 +1,6 @@
 ansible-kea
 ===========
+
 [![Build Status](https://travis-ci.com/chubchubsancho/ansible-domoticz.svg?branch=master)](https://travis-ci.com/chubchubsancho/ansible-kea)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?logo=github&style=flat)](https://raw.githubusercontent.com/chubchubsancho/ansible-kea/master/LICENSE)
 
