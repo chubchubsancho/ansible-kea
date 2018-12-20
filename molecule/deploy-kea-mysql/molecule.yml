@@ -6,13 +6,13 @@ driver:
   name: docker
 
 platforms:
-  - name: kea-debian-7
-    image: debian:7
-    env:
-      container: docker
-    groups:
-      - deploy
-      - mysql
+  # - name: kea-debian-7
+  #   image: debian:7
+  #   env:
+  #     container: docker
+  #   groups:
+  #     - deploy
+  #     - mysql
   - name: kea-debian-8
     image: debian:8
     env:
