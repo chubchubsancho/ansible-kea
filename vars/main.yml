@@ -1,4 +1,6 @@
 ---
-kea_prerequisites:
-  - git
-  - wget
+# Kea download url
+kea_url: "https://ftp.isc.org/isc/kea"
+
+# Kea tarball release
+kea_release: "kea-{{ kea_version }}.tar.gz"

@@ -1,0 +1,50 @@
+---
+- name: "download kea release tarball"
+  get_url:
+    url: "{{ kea_url }}/{{ kea_version }}/{{ kea_release }}"
+    dest: "./{{ kea_release }}"
+  tags:
+    - install
+
+- name: "extract source"
+  unarchive:
+    src: "./{{ kea_release }}"
+    dest: "./"
+    remote_src: true
+  tags:
+    - install
+
+- name: "configure kea build"
+  command: "./configure --with-openssl"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+  when: kea_database_backends == "memfile"
+
+- name: "configure kea build"
+  command: "./configure --with-mysql --with-openssl"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+  when: kea_database_backends == "mysql"
+
+- name: "build kea dhcp server"
+  command: "make"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+
+- name: "install kea dhcp server"
+  command: "make install"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+
+- name: "finish install"
+  command: "ldconfig"
+  tags:
+    - install

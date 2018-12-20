@@ -5,6 +5,13 @@
     - install
     - variables
 
+- name: "import database backends variables"
+  include_vars: "{{ kea_database_backends }}-{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+  when: kea_database_backends == "mysql" or kea_database_backends == "postgresql" or kea_database_backends == "cassandra"
+  tags:
+    - install
+    - variables
+
 - name: "install prerequisites software"
   include_tasks: "{{ ansible_os_family | lower }}-prerequisites.yml"
   tags:
@@ -18,8 +25,13 @@
     - user
 
 - name: "install database backends prerequisites"
-  include_tasks: "{{ ansible_os_family | lower }}-backends.yml"
+  include_tasks: "{{ ansible_os_family | lower }}-{{ kea_database_backends }}-install.yml"
   when: kea_database_backends == "mysql" or kea_database_backends == "postgresql" or kea_database_backends == "cassandra"
   tags:
     - install
     - backends
+
+- name: "install kea dhcp server"
+  include_tasks: "install.yml"
+  tags:
+    - install

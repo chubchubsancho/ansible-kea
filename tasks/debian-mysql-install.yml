@@ -1,12 +1,4 @@
 ---
-- name: "install Mysql APT repository package"
-  apt:
-    deb: "{{ kea_mysql_apt_url }}/{{ kea_mysql_apt_config }}"
-  tags:
-    - install
-    - backends
-    - mysql
-
 - name: "install Mysql backends requirements"
   apt:
     pkg: "{{ kea_mysql_packages }}"
