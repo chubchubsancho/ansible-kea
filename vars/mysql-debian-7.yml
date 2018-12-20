@@ -1,0 +1,4 @@
+---
+kea_mysql_packages:
+  - mariadb-client
+  - libmariadb-client-lgpl-dev
