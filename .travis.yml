@@ -9,27 +9,19 @@ stages:
   - test
 
 env:
-  - image=debian version=8 group=memfile
-  - image=debian version=8 group=mysql
-  - image=debian version=9 group=memfile
-  - image=debian version=9 group=mysql
-  - image=centos version=7 group=memfile
-  - image=centos version=7 group=mysql
+  global:
+    - image=debian version=8
+    - image=debian version=9
+    - image=centos version=7
+  matrix:
+    - group=memfile
+    - group=mysql
 
 matrix:
   fast_finish: true
 
 jobs:
   include:
-    - script:
-        - >
-           travis_wait 45 sleep infinity & docker run --rm -it
-           --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
-           -v /var/run/docker.sock:/var/run/docker.sock
-           -w /tmp/$(basename "$PWD")
-           quay.io/ansible/molecule:latest
-           sudo molecule test
-      name: deploy kea on $image $version with $group as backends
     - stage: linter
       env: image=debian verion=9 group=memfile
       script:
@@ -40,6 +32,15 @@ jobs:
            -w /tmp/$(basename "$PWD")
            quay.io/ansible/molecule:latest
            sudo molecule lint
+
+script:
+  - >
+     travis_wait 45 sleep infinity & docker run --rm -it
+     --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
+     -v /var/run/docker.sock:/var/run/docker.sock
+     -w /tmp/$(basename "$PWD")
+     quay.io/ansible/molecule:latest
+     sudo molecule test
 
 notifications:
   email:
