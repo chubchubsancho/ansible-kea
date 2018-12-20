@@ -38,6 +38,7 @@ script:
      --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
      -v /var/run/docker.sock:/var/run/docker.sock
      -w /tmp/$(basename "$PWD")
+     -e image=$image -e version=$version -e group=$group
      quay.io/ansible/molecule:latest
      sudo molecule --debug test
 
