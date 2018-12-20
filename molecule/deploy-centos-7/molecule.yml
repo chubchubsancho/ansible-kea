@@ -31,7 +31,7 @@ provisioner:
     vvv: true
 
 scenario:
-  name: deploy
+  name: deploy-centos-7
   test_sequence:
     - destroy
     - dependency
