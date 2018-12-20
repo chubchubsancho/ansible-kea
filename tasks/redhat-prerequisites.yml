@@ -15,10 +15,10 @@
     - install
     - prerequisites
 
-- name: "install centos building requirements"
-  yum:
-    name: "{{ kea_prerequisites }}"
-    state: present
-  tags:
-    - install
-    - prerequisites
+# - name: "install centos building requirements"
+#   yum:
+#     name: "{{ kea_building_requirements_centos }}"
+#     state: present
+#   tags:
+#     - install
+#     - prerequisites
