@@ -17,7 +17,6 @@ env:
     - group=memfile
     - group=mysql
 
-
 matrix:
   fast_finish: true
 
