@@ -15,6 +15,7 @@ kea_building_requirements:
   - log4cplus-devel
   - ccache
   - boost-devel
+  - wget
 
 kea_building_requirements_centos:
   - centos_release_scl

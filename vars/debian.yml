@@ -9,3 +9,4 @@ kea_building_requirements:
   - libboost-system-dev
   - liblog4cplus-dev
   - libssl-dev
+  - wget
