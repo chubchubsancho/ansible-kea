@@ -21,8 +21,7 @@ matrix:
 
 jobs:
   include:
-    - name: deploy kea on $image $version with $group as backends
-      script:
+    - script:
         - >
            travis_wait 45 sleep infinity & docker run --rm -it
            --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
@@ -30,6 +29,7 @@ jobs:
            -w /tmp/$(basename "$PWD")
            quay.io/ansible/molecule:latest
            sudo molecule test
+      name: deploy kea on $image $version with $group as backends
     - stage: linter
       env: image=debian verion=9 group=memfile
       script:
