@@ -9,12 +9,14 @@ stages:
   - test
 
 env:
-  - image=debian version:8 group:memfile
-  - image=debian version:8 group:mysql
-  - image=debian version:9 group:memfile
-  - image=debian version:9 group:mysql
-  - image=centos version:7 group:memfile
-  - image=centos version:8 group:mysql
+  global:
+    - image=debian version=8
+    - image=debian version=9
+    - image=centos version=7
+  matrix:
+    - group=memfile
+    - group=mysql
+
 
 matrix:
   fast_finish: true
