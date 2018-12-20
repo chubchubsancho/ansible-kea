@@ -11,12 +11,12 @@ lint:
     config-file: molecule/ressources/rules/yaml-lint.yml
 
 platforms:
-  - name: kea-$image-$version-$group
-    image: $image:$version
+  - name: kea-${image}-${version}-${group}
+    image: ${image}:${version}
     env:
       container: docker
     groups:
-      - $group
+      - ${group}
 
 provisioner:
   name: ansible
