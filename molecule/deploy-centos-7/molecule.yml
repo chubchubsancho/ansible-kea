@@ -1,0 +1,50 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: kea-centos7-memfile
+    image: centos:7
+    env:
+      container: docker
+    groups:
+      - deploy
+  - name: kea-centos7-mysql
+    image: centos:7
+    env:
+      container: docker
+    groups:
+      - deploy
+
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      group_vars: group_vars/
+      host_vars: host_vars/
+  playbooks:
+    converge: ../ressources/playbook.yml
+  options:
+    vvv: true
+
+scenario:
+  name: deploy
+  test_sequence:
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - side_effect
+    - verify
+    - destroy
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

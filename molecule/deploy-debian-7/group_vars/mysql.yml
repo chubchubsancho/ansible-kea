@@ -1,0 +1,8 @@
+---
+kea_database_backends: mysql
+
+kea_mysql_config:
+  host: localhost
+  user: kea
+  password: kea
+  port: 3306

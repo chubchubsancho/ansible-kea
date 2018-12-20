@@ -1,0 +1,51 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: kea-debian8-memfile
+    image: debian:jessie
+    env:
+      container: docker
+    groups:
+      - deploy
+  - name: kea-debian8-mysql
+    image: debian:jessie
+    env:
+      container: docker
+    groups:
+      - deploy
+      - mysql
+
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      group_vars: group_vars/
+      host_vars: host_vars/
+  playbooks:
+    converge: ../ressources/playbook.yml
+  options:
+    vvv: true
+
+scenario:
+  name: deploy-debian-8
+  test_sequence:
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - side_effect
+    - verify
+    - destroy
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
