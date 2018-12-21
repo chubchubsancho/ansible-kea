@@ -1,6 +1,7 @@
 ---
 kea_building_requirements:
   - cmake
+  - make
   - bison
   - flex
   - pcre-devel
@@ -15,7 +16,4 @@ kea_building_requirements:
   - ccache
   - boost-devel
   - wget
-
-kea_building_requirements_centos:
-  - centos_release_scl
   - devtoolset-7-gcc*
