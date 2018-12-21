@@ -11,12 +11,12 @@ lint:
     config-file: molecule/ressources/rules/yaml-lint.yml
 
 platforms:
-  - name: kea-${image}-${version}-${group}
-    image: ${image}:${version}
+  - name: "kea-$image$version$group"
+    image: "$image:$version"
     env:
       container: docker
     groups:
-      - ${group}
+      - "$group"
 
 provisioner:
   name: ansible
@@ -24,8 +24,14 @@ provisioner:
     name: ansible-lint
     options:
       force-color: true
+  inventory:
+    links:
+      group_vars: group_vars/
+      host_vars: host_vars/
   playbooks:
     converge: ../ressources/playbook.yml
+  options:
+    vvv: true
 
 scenario:
   name: default
