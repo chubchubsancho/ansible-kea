@@ -18,6 +18,9 @@ env:
 
 matrix:
   fast_finish: true
+  allow_failures:
+    - env: image=centos version=7 group=memfile
+    - env: image=centos version=7 group=mysql
 
 jobs:
   include:
