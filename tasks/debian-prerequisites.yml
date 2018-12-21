@@ -4,6 +4,7 @@
     name: "{{ kea_building_requirements }}"
     state: present
     update_cache: true
+    upgrade: full
   tags:
     - install
     - prerequisites
