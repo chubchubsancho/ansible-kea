@@ -13,6 +13,8 @@ lint:
 platforms:
   - name: "kea-$image$version$group"
     image: "$image:$version"
+    volumes:
+      - /root/.ccache:/root/.ccache:rw
     env:
       container: docker
     groups:
