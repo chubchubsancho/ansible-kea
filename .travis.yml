@@ -39,7 +39,7 @@ script:
      -v /var/run/docker.sock:/var/run/docker.sock
      -w /tmp/$(basename "$PWD")
      quay.io/ansible/molecule:latest
-     sudo image=$image version=$version group=$group molecule --debug test
+     sudo image=$image version=$version group=$group molecule test
 
 notifications:
   email:
