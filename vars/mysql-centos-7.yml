@@ -1,4 +1,4 @@
 ---
 kea_mysql_packages:
-  - mariadb-client
+  - MariaDB-client
   - mariadb-libs
