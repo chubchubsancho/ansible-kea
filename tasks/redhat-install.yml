@@ -9,7 +9,7 @@
     - install
 
 - name: "configure kea build"
-  command: "scl enable devtoolset-7 -- ./configure --with-openssl --with_mysql"
+  command: "scl enable devtoolset-7 -- ./configure --with-mysql --with-openssl"
   args:
     chdir: "kea-{{ kea_version }}"
   when:
