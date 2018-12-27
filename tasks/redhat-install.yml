@@ -1,0 +1,37 @@
+---
+- name: "configure kea build"
+  command: "scl enable devtoolset-7 -- ./configure --with-openssl"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  when:
+    - kea_database_backends == "memfile"
+  tags:
+    - install
+
+- name: "configure kea build"
+  command: "scl enable devtoolset-7 -- ./configure --with-mysql --with-openssl"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  when:
+    - kea_database_backends == "mysql"
+  tags:
+    - install
+
+- name: "build kea dhcp server"
+  command: "scl enable devtoolset-7 -- make"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+
+- name: "install kea dhcp server"
+  command: "scl enable devtoolset-7 -- make install"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+
+- name: "finish install"
+  command: "ldconfig"
+  tags:
+    - install

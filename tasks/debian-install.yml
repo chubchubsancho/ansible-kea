@@ -1,26 +1,12 @@
 ---
-- name: "download kea release tarball"
-  get_url:
-    url: "{{ kea_url }}/{{ kea_version }}/{{ kea_release }}"
-    dest: "./{{ kea_release }}"
-  tags:
-    - install
-
-- name: "extract source"
-  unarchive:
-    src: "./{{ kea_release }}"
-    dest: "./"
-    remote_src: true
-  tags:
-    - install
-
 - name: "configure kea build"
-  command: "./configure --with-openssl"
+  command: "./configure --with-mysql --with-openssl"
   args:
     chdir: "kea-{{ kea_version }}"
   tags:
     - install
-  when: kea_database_backends == "memfile"
+  when:
+    - kea_database_backends == "memfile"
 
 - name: "configure kea build"
   command: "./configure --with-mysql --with-openssl"

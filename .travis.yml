@@ -4,11 +4,18 @@ language: python
 services:
   - docker
 
+cache:
+  ccache: true
+  directories:
+    - $HOME/.ccache
+
 stages:
   - linter
   - test
 
 env:
+  - image=debian version=7 group=memfile
+  - image=debian version=7 group=mysql
   - image=debian version=8 group=memfile
   - image=debian version=8 group=mysql
   - image=debian version=9 group=memfile
@@ -19,6 +26,8 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
+    - env: image=debian version=7 group=memfile
+    - env: image=debian version=7 group=mysql
     - env: image=centos version=7 group=memfile
     - env: image=centos version=7 group=mysql
 
@@ -40,6 +49,7 @@ script:
      travis_wait 60 sleep infinity & docker run --rm -it
      --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
      -v /var/run/docker.sock:/var/run/docker.sock
+     -v $HOME/.ccache:/root/.ccache:rw
      -w /tmp/$(basename "$PWD")
      quay.io/ansible/molecule:latest
      sudo image=$image version=$version group=$group molecule test

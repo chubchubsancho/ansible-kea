@@ -1,5 +1,5 @@
 ---
-- name: "install epel-release"
+- name: "install repo"
   yum:
     name:
       - epel-release
@@ -13,12 +13,6 @@
   yum:
     name: "{{ kea_building_requirements }}"
     state: present
-  tags:
-    - install
-    - prerequisites
-
-- name: "set path to GCC 7"
-  command: scl enable devtoolset-7 bash
   tags:
     - install
     - prerequisites
