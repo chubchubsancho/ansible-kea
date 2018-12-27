@@ -17,11 +17,6 @@
   tags:
     - install
 
-# - name: "go to kea src directory"
-#   command: "cd kea-{{ kea_version }}"
-#   tags:
-#     - install
-
 - name: "build kea dhcp server"
   command: "scl enable devtoolset-7 -- make"
   args:
