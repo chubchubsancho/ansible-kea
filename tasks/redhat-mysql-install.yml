@@ -1,0 +1,22 @@
+---
+- name: "install Mysql backends requirements"
+  yum:
+    pkg: "{{ kea_mysql_packages }}"
+    state: present
+    update_cache: true
+  tags:
+    - install
+    - backends
+    - mysql
+
+- name: "configure mysql client"
+  template:
+    src: etc/mysql/conf.d/kea.cnf.j2
+    dest: /etc/mysql/conf.d/kea.cnf
+    owner: "{{ kea_user }}"
+    group: "{{ kea_group }}"
+    mode: 0644
+  tags:
+    - install
+    - backends
+    - mysql

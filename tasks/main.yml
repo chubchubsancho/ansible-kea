@@ -31,7 +31,13 @@
     - install
     - backends
 
+- name: "download kea source"
+  include_tasks: "download.yml"
+  tags:
+    - install
+    - download
+
 - name: "install kea dhcp server"
-  include_tasks: "install.yml"
+  include_tasks: "{{ ansible_os_family | lower }}-install.yml"
   tags:
     - install

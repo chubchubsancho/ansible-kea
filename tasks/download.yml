@@ -1,0 +1,15 @@
+---
+- name: "download kea release tarball"
+  get_url:
+    url: "{{ kea_url }}/{{ kea_version }}/{{ kea_release }}"
+    dest: "./{{ kea_release }}"
+  tags:
+    - install
+
+- name: "extract source"
+  unarchive:
+    src: "./{{ kea_release }}"
+    dest: "./"
+    remote_src: true
+  tags:
+    - install
