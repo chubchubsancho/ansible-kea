@@ -4,7 +4,10 @@ language: python
 services:
   - docker
 
-cache: ccache
+cache: 
+  ccache: true
+  directories:
+    - $HOME/.ccache
 
 stages:
   - linter
@@ -42,7 +45,7 @@ script:
      travis_wait 60 sleep infinity & docker run --rm -it
      --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
      -v /var/run/docker.sock:/var/run/docker.sock
-     -v $HOME/.cache:/root/.ccache:rw
+     -v $HOME/.ccache:/root/.ccache:rw
      -w /tmp/$(basename "$PWD")
      quay.io/ansible/molecule:latest
      sudo image=$image version=$version group=$group molecule test
