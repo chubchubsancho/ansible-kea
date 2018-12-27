@@ -1,4 +1,13 @@
 ---
+- name: "add mariadb repo"
+  copy:
+    src: "etc/yum.repos.d/mariadb.repo"
+    dest: "/etc/yum.repos.d/mariadb.repo"
+  tags:
+    - install
+    - backends
+    - mysql
+
 - name: "install Mysql backends requirements"
   yum:
     pkg: "{{ kea_mysql_packages }}"
