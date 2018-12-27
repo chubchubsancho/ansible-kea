@@ -4,7 +4,7 @@ language: python
 services:
   - docker
 
-cache: 
+cache:
   ccache: true
   directories:
     - $HOME/.ccache
