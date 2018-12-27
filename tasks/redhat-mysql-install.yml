@@ -21,7 +21,7 @@
 - name: "configure mysql client"
   template:
     src: etc/mysql/conf.d/kea.cnf.j2
-    dest: /etc/mysql/conf.d/kea.cnf
+    dest: /etc/my.cnf.d/kea.cnf
     owner: "{{ kea_user }}"
     group: "{{ kea_group }}"
     mode: 0644
