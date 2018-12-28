@@ -1,4 +1,11 @@
 ---
+- name: "autoreconf"
+  command: "scl enable devtoolset-7 -- autoreconf --install"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+
 - name: "configure kea build"
   command: "scl enable devtoolset-7 -- ./configure --with-openssl"
   args:
@@ -18,7 +25,7 @@
     - install
 
 - name: "build kea dhcp server"
-  command: "scl enable devtoolset-7 -- make"
+  command: "scl enable devtoolset-7 -- make -j4"
   args:
     chdir: "kea-{{ kea_version }}"
   tags:

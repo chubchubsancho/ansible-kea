@@ -17,6 +17,10 @@ platforms:
       - /root/.ccache:/root/.ccache:rw
     env:
       container: docker
+      PATH: "/usr/lib64/ccache:$PATH"
+      PKG_CONFIG_PATH: "/usr/local/lib64/pkgconfig"
+      CXX: "ccache g++"
+      CC: "ccache gcc"
     groups:
       - "$group"
 

@@ -1,4 +1,11 @@
 ---
+- name: "autoreconf "
+  command: "autoreconf --install"
+  args:
+    chdir: "kea-{{ kea_version }}"
+  tags:
+    - install
+
 - name: "configure kea build"
   command: "./configure --with-mysql --with-openssl"
   args:
@@ -17,7 +24,7 @@
   when: kea_database_backends == "mysql"
 
 - name: "build kea dhcp server"
-  command: "make"
+  command: "make -j4"
   args:
     chdir: "kea-{{ kea_version }}"
   tags:
