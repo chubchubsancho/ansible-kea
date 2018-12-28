@@ -7,7 +7,7 @@ services:
 cache:
   ccache: true
   directories:
-    - $HOME/.ccache
+    - /root/.ccache
 
 stages:
   - linter
