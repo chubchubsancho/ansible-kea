@@ -28,8 +28,6 @@ matrix:
   allow_failures:
     - env: image=debian version=7 group=memfile
     - env: image=debian version=7 group=mysql
-    - env: image=centos version=7 group=memfile
-    - env: image=centos version=7 group=mysql
 
 jobs:
   include:
