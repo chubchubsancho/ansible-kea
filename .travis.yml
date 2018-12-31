@@ -7,7 +7,7 @@ services:
 cache:
   ccache: true
   directories:
-    - /root/.ccache
+    - /home/travis/.ccache
 
 stages:
   - linter
