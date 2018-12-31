@@ -20,6 +20,10 @@ env:
   - image=debian version=8 group=mysql
   - image=debian version=9 group=memfile
   - image=debian version=9 group=mysql
+  - image=ubuntu version=xenial group=memfile
+  - image=ubuntu version=xenial group=mysql
+  - image=ubuntu version=bionic group=memfile
+  - image=ubuntu version=bionic group=mysql
   - image=centos version=7 group=memfile
   - image=centos version=7 group=mysql
 
