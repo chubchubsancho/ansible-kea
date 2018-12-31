@@ -31,6 +31,10 @@ galaxy_info:
     - name: EL
       versions:
         - 7
+    - name: Ubuntu
+      version:
+        - xenial
+        - bionic
 
   galaxy_tags:
     - dhcp
