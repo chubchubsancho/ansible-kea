@@ -12,8 +12,22 @@
     - install
     - variables
 
+- name: "import database backends variables"
+  include_vars: "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution | lower == "debian" and ansible_distribution_major_version == "7"
+  tags:
+    - install
+    - variables
+
 - name: "install prerequisites software"
   include_tasks: "{{ ansible_os_family | lower }}-prerequisites.yml"
+  tags:
+    - install
+    - prerequisites
+
+- name: "install prerequisites software for debian 7"
+  include_tasks: "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version }}-prerequisites.yml"
+  when: ansible_distribution | lower == "debian" and ansible_distribution_major_version == "7"
   tags:
     - install
     - prerequisites

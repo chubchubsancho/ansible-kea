@@ -1,0 +1,5 @@
+---
+kea_debian7_boost_version: "1.57.0"
+kea_debian7_boost_url: "http://sourceforge.net/projects/boost/files/boost/{{ kea_debian7_boost_version }}"
+kea_debian7_boost_package: "boost_1_57_0.tar.gz"
+kea_debian7_boost_path: "/usr/local/boost_1_57_0"

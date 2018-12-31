@@ -1,0 +1,17 @@
+---
+- name: "download boost 1.57"
+  get_url:
+    url: "{{ kea_debian7_boost_url }}/{{ kea_debian7_boost_package }}"
+    dest: "./{{ kea_debian7_boost_package }}"
+  tags:
+    - install
+    - boost
+
+- name: "extract boost"
+  unarchive:
+    src: "./{{ kea_debian7_boost_package }}"
+    dest: "{{ kea_debian7_boost_path }}"
+    remote_src: true
+  tags:
+    - install
+    - boost
