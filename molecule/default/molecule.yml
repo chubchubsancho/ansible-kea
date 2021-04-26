@@ -1,14 +1,17 @@
 ---
 dependency:
   name: galaxy
+  options:
+    role-files: requirements.yml
 
 driver:
   name: docker
 
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/ressources/rules/yaml-lint.yml
+lint: |
+  set -e
+  yamllint -c ./molecule/resources/rules/yamllint.yaml .
+  ansible-lint .
+  flake8
 
 platforms:
   - name: "kea-$image$version$group"
@@ -25,11 +28,8 @@ platforms:
       - "$group"
 
 provisioner:
+  log: true
   name: ansible
-  lint:
-    name: ansible-lint
-    options:
-      force-color: true
   inventory:
     links:
       group_vars: group_vars/
@@ -38,6 +38,7 @@ provisioner:
     converge: ../ressources/playbook.yml
   options:
     vvv: true
+    dif: true
 
 scenario:
   name: default
@@ -51,9 +52,6 @@ scenario:
     # - idempotence
     # - side_effect
     # - verify
-    - destroy
 
 verifier:
   name: testinfra
-  lint:
-    name: flake8
