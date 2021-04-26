@@ -1,5 +1,6 @@
 ---
-sudo: required
+os: linux
+dist: bionic
 language: python
 services:
   - docker
@@ -9,54 +10,59 @@ cache:
   directories:
     - /home/travis/.ccache
 
+install: skip
+
 stages:
   - linter
-  - test
+  - build
 
-env:
-  - image=debian version=7 group=memfile
-  - image=debian version=7 group=mysql
-  - image=debian version=8 group=memfile
-  - image=debian version=8 group=mysql
-  - image=debian version=9 group=memfile
-  - image=debian version=9 group=mysql
-  - image=ubuntu version=xenial group=memfile
-  - image=ubuntu version=xenial group=mysql
-  - image=ubuntu version=bionic group=memfile
-  - image=ubuntu version=bionic group=mysql
-  - image=centos version=7 group=memfile
-  - image=centos version=7 group=mysql
-
-matrix:
+jobs:
   fast_finish: true
   allow_failures:
     - env: image=debian version=7 group=memfile
     - env: image=debian version=7 group=mysql
-
-jobs:
   include:
     - stage: linter
-      env: image=debian verion=9 group=memfile
+      env: image=debian verion=10
       script:
         - >
-           docker run --rm -it
-           --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
-           -v /var/run/docker.sock:/var/run/docker.sock
-           -w /tmp/$(basename "$PWD")
-           quay.io/ansible/molecule:latest
-           sudo molecule lint
+          docker run --rm -it
+          --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
+          -v /var/run/docker.sock:/var/run/docker.sock
+          -w /tmp/$(basename "$PWD")
+          quay.io/ansible/molecule:3.0.8
+          molecule lint
+    - stage: build
+      env: image=debian version=7 group=memfile
+    - env: image=debian version=7 group=mysql
+    - env: image=debian version=8 group=memfile
+    - env: image=debian version=8 group=mysql
+    - env: image=debian version=9 group=memfile
+    - env: image=debian version=9 group=mysql
+    - env: image=ubuntu version=xenial group=memfile
+    - env: image=ubuntu version=xenial group=mysql
+    - env: image=ubuntu version=bionic group=memfile
+    - env: image=ubuntu version=bionic group=mysql
+    - env: image=centos version=7 group=memfile
+    - env: image=centos version=7 group=mysql
 
 script:
   - >
-     travis_wait 60 sleep infinity & docker run --rm -it
-     --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
-     -v /var/run/docker.sock:/var/run/docker.sock
-     -v /home/travis/.ccache:/root/.ccache:rw
-     -w /tmp/$(basename "$PWD")
-     quay.io/ansible/molecule:latest
-     sudo image=$image version=$version group=$group molecule test
+    travis_wait 20 sleep infinity & docker run --rm -it --env image=$image
+    --env version=$version --env group=$group
+    --mount type=bind,source="$(pwd)",target=/tmp/$(basename "$PWD")
+    -v /var/run/docker.sock:/var/run/docker.sock
+    -w /tmp/$(basename "$PWD")
+    quay.io/ansible/molecule:3.0.8
+    molecule test
 
 notifications:
   email:
     on_failure: change
     on_success: never
+  webhooks:
+    if: branch = "master"
+    urls:
+      - https://galaxy.ansible.com/api/v1/notifications/
+    on_failure: change
+    on_success: always
